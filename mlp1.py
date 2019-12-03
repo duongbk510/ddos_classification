@@ -37,7 +37,7 @@ y = df.iloc[:,27]
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.34, random_state=42)
 
 mlp = MLPClassifier(hidden_layer_sizes=(number_hidden), 
-					learning_rate=lr, 
+					learning_rate_init=lr, 
 					momentum=0.2, 
 					max_iter=n_epochs)
 
