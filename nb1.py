@@ -3,7 +3,7 @@ from scipy.io import arff
 import numpy as np
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
-from sklearn.naive_bayes import MultinomialNB
+from sklearn.naive_bayes import MultinomialNB, GaussianNB
 from sklearn.ensemble import BaggingClassifier
 from sklearn.multiclass import OneVsRestClassifier
 import pickle
@@ -34,7 +34,7 @@ y = df.iloc[:,27]
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.34, random_state=42)
 
-nb_clf = MultinomialNB(class_prior = [6,7,8,9,10])
+nb_clf = GaussianNB()
 
 nb_clf.fit(X_train, y_train)
 
@@ -48,8 +48,8 @@ model_clf = pickle.load(open(model_name, 'rb'))
 predict_train = model_clf.predict(X_train)
 predict_test = model_clf.predict(X_test)
 
-print('Accuracy of NB classifier on training set: {:.2f}'.format(model_clf.score(X_train, y_train)))
-print('Accuracy of NB classifier on test set: {:.2f}'.format(model_clf.score(X_test, y_test)))
+print('Accuracy of NB classifier on training set: {:.4f}'.format(model_clf.score(X_train, y_train)))
+print('Accuracy of NB classifier on test set: {:.4f}'.format(model_clf.score(X_test, y_test)))
 
 print(confusion_matrix(y_train,predict_train))
 print(classification_report(y_train,predict_train))
